@@ -35,7 +35,7 @@ function App() {
 
   const retrievOrders = async () => {
     const response = await orderApi.get("all");
-    console.log(response);
+    //console.log(response);
     return response.data;
   };
 
@@ -87,22 +87,17 @@ function App() {
     }
     console.log(response.data);
     localStorage.setItem(LOCAL_STORAGE_KEY, "");
-    //getAllOrders();
   };
 
   const getAllOrders = async () => {
     const allOrders = await retrievOrders();
-    console.log(allOrders);
+    console.log("All : ", allOrders);
     if (allOrders) setOrders(allOrders);
   };
 
   useEffect(() => {
     getAllOrders();
   }, []);
-
-  useEffect(() => {
-    // socket.on("orders", messageListener);
-  }, [orders]);
 
   return (
     <div className="ui container">
