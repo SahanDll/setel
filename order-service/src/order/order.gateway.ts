@@ -11,15 +11,21 @@ import { Server, Socket } from "socket.io";
 @Injectable()
 export class OrderGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect{
 
+    private clients: Socket[] = []; 
+
     @WebSocketServer()
     wss : Server;
 
     private logger: Logger = new Logger('WebSocket');
 
     handleDisconnect(client: Socket) {
+        this.clients = this.clients.filter((cli) => {
+            return cli.id !== client.id;
+          });
         this.logger.log('WS client disconnected ' + client.id);
     }
     handleConnection(client: Socket, ...args: any[]) {
+        this.clients.push(client);
         this.logger.log('WS client connected ' + client.id);
     }
 
@@ -37,7 +43,10 @@ export class OrderGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
     }
 
     public pushData = (data) => {
-        this.logger.log("orders : "+ data)
-        this.wss.emit('orders', data);
+        //this.logger.log("orders : "+ data)
+        if(this.clients.length > 0){
+            this.clients.slice(-1)[0].emit('orders', data);
+        }
+        //this.wss.emit('orders', data);
     }
 }

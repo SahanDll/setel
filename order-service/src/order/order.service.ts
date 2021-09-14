@@ -15,7 +15,7 @@ export class OrderService {
 
     async getAllOrders(){
         const result = await this.orderModel.find().exec();
-        console.log(result);
+        //console.log(result);
         return result;
     }
 

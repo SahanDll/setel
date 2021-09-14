@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
@@ -19,13 +20,21 @@ function App() {
   const LOCAL_STORAGE_KEY = "orderPin";
   const [orders, setOrders] = useState([]);
 
-  const messageListener = (response) => {
-    console.log("RES : " + JSON.stringify(response));
-    setOrders(response);
-  };
+  useEffect(() => {
+    const messageListener = (response) => {
+      console.log("RES : " + JSON.stringify(response));
+      setOrders(response);
+    };
+
+    async function connect() {
+      socket.on("orders", messageListener);
+      console.log("Web socket connected");
+    }
+    connect();
+  }, []);
 
   const retrievOrders = async () => {
-    const response = await orderApi.get("order/all");
+    const response = await orderApi.get("all");
     console.log(response);
     return response.data;
   };
@@ -36,12 +45,12 @@ function App() {
       ...order,
     };
 
-    const response = await orderApi.post("/order/create", request);
+    const response = await orderApi.post("create", request);
     setOrders([...orders, response.data]);
   };
 
   const removeOrderHandler = async (id) => {
-    await orderApi.delete(`order/delete/${id}`);
+    await orderApi.delete(`delete/${id}`);
     const newOrderList = orders.filter((order) => {
       return order._id !== id;
     });
@@ -50,7 +59,7 @@ function App() {
   };
 
   const cancelOrderHandler = async (id) => {
-    await orderApi.post(`order/cancel/${id}`);
+    await orderApi.post(`cancel/${id}`);
     alert("Order cancelled : " + id);
     getAllOrders();
   };
@@ -68,7 +77,7 @@ function App() {
       remarks: "",
     };
     console.log(request);
-    const response = await paymentApi.post("/payment/pay", request);
+    const response = await paymentApi.post("pay", request);
     if (response.data.status === 1) {
       alert("Payment Confirmed");
     } else if (response.data.status === 4) {
@@ -92,8 +101,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    socket.on("orders", messageListener);
-  }, [orders, socket]);
+    // socket.on("orders", messageListener);
+  }, [orders]);
 
   return (
     <div className="ui container">
