@@ -4,8 +4,8 @@ const axios = require("axios");
 const registry = require("./registry.json");
 
 router.all("/:serviceName/:endPoint", (req, res) => {
-  console.log(req.params.serviceName);
-  console.log(req.params.endPoint);
+  //console.log(req.params.serviceName);
+  //console.log(req.params.endPoint);
   if (registry.services[req.params.serviceName]) {
     axios({
       method: req.method,
@@ -21,9 +21,9 @@ router.all("/:serviceName/:endPoint", (req, res) => {
 });
 
 router.all("/:serviceName/:endPoint/:path", (req, res) => {
-  console.log(req.params.serviceName);
-  console.log(req.params.endPoint);
-  console.log(req.params.path);
+  // console.log(req.params.serviceName);
+  // console.log(req.params.endPoint);
+  // console.log(req.params.path);
   if (registry.services[req.params.serviceName]) {
     axios({
       method: req.method,

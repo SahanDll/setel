@@ -2,7 +2,7 @@
 
 ###Start api gateway
 ####Go to /api-gateway
-#####Execute npm run dev
+#####Execute npm run start
 ######Service will start with 127.0.0.1:4000
 ######---------------------------------------------------------------
 ###Start order service
