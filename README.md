@@ -21,3 +21,15 @@
 ####Go to /order-system
 #####Execute npm start
 ######Service will start with http://localhost:3000/
+
+
+
+#####---------------------------------------------------------------
+#####References
+######https://www.youtube.com/watch?v=0riHps91AzE
+######https://www.youtube.com/watch?v=n7R8fwLTfDg
+######https://www.youtube.com/watch?v=0zyYhm5MjJ4&t=618s
+######https://www.youtube.com/watch?v=lsX2jpd-fd4&t=619s
+######https://www.youtube.com/watch?v=ulfU5vY6I78&t=2109s
+######https://www.youtube.com/watch?v=1Vc6Xw8FMpg&t=427s
+
