@@ -7,7 +7,7 @@ import { MessageBody, OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit, S
 import { Server, Socket } from "socket.io";
 
 //@WebSocketGateway(80, {namespace: 'order'})
-@WebSocketGateway()
+@WebSocketGateway(3003)
 @Injectable()
 export class OrderGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect{
 

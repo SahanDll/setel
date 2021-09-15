@@ -11,7 +11,7 @@ import OrderDetail from "./OrderDetail";
 import orderApi from "../api/orders";
 import paymentApi from "../api/payment";
 import EnterPin from "./EnterPin";
-const ENDPOINT = "http://127.0.0.1:3001/";
+const ENDPOINT = "http://127.0.0.1:3003/";
 const socket = socketIOClient(ENDPOINT, {
   transports: ["websocket"],
 });
